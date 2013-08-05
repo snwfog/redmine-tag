@@ -1,0 +1,40 @@
+.tags {
+  float: right; }
+  .tags ul {
+    margin: 0;
+    list-style: none; }
+    .tags ul li {
+      margin-bottom: 5px;
+      float: left;
+      height: 16px;
+      line-height: 16px;
+      position: relative;
+      font-size: 11px;
+      margin-left: 12px;
+      padding: 0px 4px 0px 6px;
+      background: #ADD5F1;
+      color: #588FB8;
+      text-decoration: none;
+      border-bottom-right-radius: 2px;
+      border-top-right-radius: 2px; }
+      .tags ul li:before {
+        content: "";
+        float: left;
+        position: absolute;
+        top: 0px;
+        left: -8px;
+        width: 0px;
+        height: 0px;
+        border-color: transparent #ADD5F1 transparent transparent;
+        border-style: solid;
+        border-width: 8px 8px 8px 0; }
+      .tags ul li:after {
+        content: "";
+        position: absolute;
+        top: 6px;
+        left: 0;
+        float: left;
+        width: 3px;
+        height: 3px;
+        border-radius: 1px;
+        background: #FFFEDC; }
