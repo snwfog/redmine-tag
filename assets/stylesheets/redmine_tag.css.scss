@@ -14,7 +14,7 @@ $green: #00CC00;
 }
 
 @for $i from 1 through 9 {
-  @include tag-color(adjust-hue($green, -180*$i/10), $i);
+  @include tag-color(saturate(adjust-hue($green, -180*$i/10%), 50%), $i);
 }
 
 @include tag-color(#ADD5F1, 0);
