@@ -23,14 +23,9 @@
 
 <div class="tags">
   <ul>
-    <li>good</li>
-    <li>bad</li>
-    <li>defected</li>
-    <li>post-poned</li>
-    <li>renamed</li>
-    <li>good</li>
-    <li>bad</li>
-    <li>defected</li>
+    <% @issue.tags.each do |tag| %>
+      <li><%= tag.tag_descriptor.description %></li>
+    <% end %>
   </ul>
 </div>
 <hr />
