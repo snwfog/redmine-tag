@@ -1,6 +1,6 @@
 require_dependency 'issue'
 
-module RedmineTags
+module RedmineTag
   module Patches
     module IssuePatch
       def self.included(base)
@@ -12,6 +12,9 @@ module RedmineTags
 
           has_many :tags
           has_many :tag_descriptors, through: :tags
+
+          safe_attributes 'tags',
+          :if => lambda { |issue, user| issue.new_record? || user.allowed_to?(:edit_issues, issue.project)  }
         end
       end
 
@@ -25,6 +28,6 @@ module RedmineTags
   end
 end
 
-unless Issue.included_modules.include?(RedmineTags::Patches::IssuePatch)
-  Issue.send(:include, RedmineTags::Patches::IssuePatch)
+unless Issue.included_modules.include?(RedmineTag::Patches::IssuePatch)
+  Issue.send(:include, RedmineTag::Patches::IssuePatch)
 end
