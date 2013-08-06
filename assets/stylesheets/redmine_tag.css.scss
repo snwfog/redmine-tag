@@ -1,3 +1,24 @@
+$green: #00CC00;
+
+@mixin tag-color($color, $severity) {
+  .tags {
+    ul {
+      li.severity-#{$severity} {
+        background: $color;
+        &:before {
+          border-color: transparent $color transparent transparent;
+        }
+      }
+    }
+  }
+}
+
+@for $i from 1 through 9 {
+  @include tag-color(adjust-hue($green, -180*$i/10), $i);
+}
+
+@include tag-color(#ADD5F1, 0);
+
 .tags {
   float: right;
 
@@ -14,7 +35,6 @@
       font-size: 11px;
       margin-left: 12px;
       padding: 0px 4px 0px 6px;
-      background: #ADD5F1;
       color: #588FB8;
       text-decoration: none;
       border-bottom-right-radius: 2px;
@@ -28,7 +48,6 @@
         left: -8px;
         width: 0px;
         height: 0px;
-        border-color: transparent #ADD5F1 transparent transparent;
         border-style: solid;
         border-width: 8px 8px 8px 0;
       }
