@@ -19,10 +19,6 @@ module RedmineTag
       module InstanceMethods
         def update_with_tags
           build_tag_from_param
-          #tags = build_tag_from_param
-          #tag_ids = tags.map(&:id) unless tags.empty?
-          # Replace now the tag in params with tag_ids for mass insertion
-          #params[:issue][:tags] = tag_ids
           update_without_tags
         end
 
@@ -48,7 +44,7 @@ module RedmineTag
             tag_descriptor = TagDescriptor.find_by_description description
             tag_descriptor ||= TagDescriptor.create(description: description)
 
-            Tag.create(severity: severity, tag_descriptor: tag_descriptor, issue: @issue) if tag_descriptor
+            tag = Tag.find_or_create_by_severity_and_tag_descriptor_id_and_issue_id(severity, tag_descriptor.id, @issue.id)
           end
         end
       end
