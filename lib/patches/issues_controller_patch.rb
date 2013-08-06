@@ -37,14 +37,15 @@ module RedmineTag
           params_tag = params[:issue].delete(:tags) || []
           return if params_tag.empty?
 
-          tags = params_tag.split(',').map do |tag|
-            severity = tag.count("!")
-            description = tag.scan(/[\w\s]+/).pop.strip
-
-            tag_descriptor = TagDescriptor.find_by_description description
-            tag_descriptor ||= TagDescriptor.create(description: description)
-
-            tag = Tag.find_or_create_by_severity_and_tag_descriptor_id_and_issue_id(severity, tag_descriptor.id, @issue.id)
+          Tag.transaction do
+            Tag.delete_all(["issue_id", @issue.id])
+            tags = params_tag.split(',').map do |tag|
+              description = tag.scan(/[\w\s]+/).pop.strip
+              severity = tag.count("!")
+              tag_descriptor = TagDescriptor.find_by_description description
+              tag_descriptor ||= TagDescriptor.create(description: description)
+              tag = Tag.find_or_create_by_severity_and_tag_descriptor_id_and_issue_id(severity, tag_descriptor.id, @issue.id)
+            end
           end
         end
       end
