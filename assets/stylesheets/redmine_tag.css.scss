@@ -1,13 +1,16 @@
 $green: #00CC00;
 
+div.tags {
+  float: right;
+  margin-bottom: 5px;
+}
+
 @mixin tag-color($color, $severity) {
-  .tags {
-    ul {
-      li.severity-#{$severity} {
-        background: $color;
-        &:before {
-          border-color: transparent $color transparent transparent;
-        }
+  ul.tags {
+    li.severity-#{$severity} {
+      background: $color;
+      &:before {
+        border-color: transparent $color transparent transparent;
       }
     }
   }
@@ -19,50 +22,49 @@ $green: #00CC00;
 
 @include tag-color(#ADD5F1, 0);
 
-.tags {
-  float: right;
+ul.tags {
+  margin: 0;
+  list-style: none;
+  display: inline-block;
+  padding-left: 0px;
 
-  ul {
-    margin: 0;
-    list-style: none;
+  li {
+    margin-bottom: -4px;
+    margin-right: 4px;
+    float: left;
+    height: 16px;
+    line-height: 16px;
+    position: relative;
+    font-size: 11px;
+    margin-left: 12px;
+    padding: 0px 4px 0px 6px;
+    color: #588FB8;
+    text-decoration: none;
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
 
-    li {
-      margin-bottom: 5px;
+    &:before {
+      content: "";
       float: left;
-      height: 16px;
-      line-height: 16px;
-      position: relative;
-      font-size: 11px;
-      margin-left: 12px;
-      padding: 0px 4px 0px 6px;
-      color: #588FB8;
-      text-decoration: none;
-      border-bottom-right-radius: 2px;
-      border-top-right-radius: 2px;
+      position: absolute;
+      top: 0px;
+      left: -8px;
+      width: 0px;
+      height: 0px;
+      border-style: solid;
+      border-width: 8px 8px 8px 0;
+    }
 
-      &:before {
-        content: "";
-        float: left;
-        position: absolute;
-        top: 0px;
-        left: -8px;
-        width: 0px;
-        height: 0px;
-        border-style: solid;
-        border-width: 8px 8px 8px 0;
-      }
-
-      &:after {
-        content: "";
-        position: absolute;
-        top: 6px;
-        left: 0;
-        float: left;
-        width: 3px;
-        height: 3px;
-        border-radius: 1px;
-        background: #FFFEDC;
-      }
+    &:after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 0;
+      float: left;
+      width: 3px;
+      height: 3px;
+      border-radius: 1px;
+      background: #FFFEDC;
     }
   }
 }
