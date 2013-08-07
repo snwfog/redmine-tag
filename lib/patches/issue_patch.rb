@@ -5,7 +5,7 @@ module RedmineTag
     module IssuePatch
       def self.included(base)
         # base.extend(ClassMethods)
-        # base.send(:include, InstanceMethods)
+        base.send(:include, InstanceMethods)
 
         base.class_eval do
           unloadable
@@ -15,10 +15,75 @@ module RedmineTag
 
           safe_attributes 'tags',
           :if => lambda { |issue, user| issue.new_record? || user.allowed_to?(:edit_issues, issue.project)  }
+
+          alias_method_chain :init_journal, :tags
+          alias_method_chain :create_journal, :tags
+          alias_method_chain :assign_attributes, :tags_removed
         end
       end
 
       module InstanceMethods
+        def build_tag_from_param
+          @params_tags ||= []
+          return if @params_tags.empty?
+
+          Tag.transaction do
+            Tag.delete_all(["issue_id", self.id])
+            tags = @params_tags.split(',').map do |tag|
+              description = tag.scan(/[\w\s]+/).pop.strip
+              severity = tag.count("!")
+              tag_descriptor = TagDescriptor.find_by_description description
+              tag_descriptor ||= TagDescriptor.create(description: description)
+              tag = Tag.find_or_create_by_severity_and_tag_descriptor_id_and_issue_id(severity, tag_descriptor.id, self.id)
+            end
+          end
+        end
+
+        def assign_attributes_with_tags_removed(new_attributes, *args)
+          @params_tags = unless new_attributes[:tags].nil?
+            new_attributes.delete(:tags)
+          end
+
+          build_tag_from_param
+          assign_attributes_without_tags_removed(new_attributes, *args)
+        end
+
+        def init_journal_with_tags(user, notes="")
+          init_journal_without_tags(user, notes)
+          if new_record?
+            # No yet handled
+          else
+            @tags_before_change = self.tags.dup
+          end
+        end
+
+        def create_journal_with_tags
+          if @current_journal
+            if @tags_before_change
+              @tags_before_change.each do |tag|
+                if (self.tag_descriptor_ids.include?(tag.tag_descriptor_id))
+                  updated_tag = Tag.find_by_tag_descriptor_id(tag.tag_descriptor_id)
+                  if updated_tag.severity != tag.severity
+                    @current_journal.details << JournalDetail.new(property: "tag", prop_key: updated_tag.id, old_value: tag.id, value: updated_tag.id)
+                  end
+                else
+                  # Then this tag is removed
+                  @current_journal.details << JournalDetail.new(property: "tag", prop_key: tag.id, old_value: tag.severity, value: tag.to_s)
+                end
+              end
+
+              # Added tags
+              ids = @tags_before_change.map(&:tag_descriptor_id)
+              self.tag_descriptor_ids.each do |descriptor_id|
+                unless ids.include?(descriptor_id)
+                  @current_journal.details << JournalDetail.new(property: "tag", prop_key: descriptor_id, old_value: nil, value: nil);
+                end
+              end
+
+            end
+          end
+          create_journal_without_tags
+        end
       end
 
       module ClassMethods

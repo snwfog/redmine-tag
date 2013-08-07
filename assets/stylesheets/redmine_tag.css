@@ -1,3 +1,53 @@
+.tags ul li.severity-1 {
+  background: #3dcc00; }
+  .tags ul li.severity-1:before {
+    border-color: transparent #3dcc00 transparent transparent; }
+
+.tags ul li.severity-2 {
+  background: #7acc00; }
+  .tags ul li.severity-2:before {
+    border-color: transparent #7acc00 transparent transparent; }
+
+.tags ul li.severity-3 {
+  background: #b8cc00; }
+  .tags ul li.severity-3:before {
+    border-color: transparent #b8cc00 transparent transparent; }
+
+.tags ul li.severity-4 {
+  background: #cca300; }
+  .tags ul li.severity-4:before {
+    border-color: transparent #cca300 transparent transparent; }
+
+.tags ul li.severity-5 {
+  background: #cc6600; }
+  .tags ul li.severity-5:before {
+    border-color: transparent #cc6600 transparent transparent; }
+
+.tags ul li.severity-6 {
+  background: #cc2900; }
+  .tags ul li.severity-6:before {
+    border-color: transparent #cc2900 transparent transparent; }
+
+.tags ul li.severity-7 {
+  background: #cc0014; }
+  .tags ul li.severity-7:before {
+    border-color: transparent #cc0014 transparent transparent; }
+
+.tags ul li.severity-8 {
+  background: #cc0052; }
+  .tags ul li.severity-8:before {
+    border-color: transparent #cc0052 transparent transparent; }
+
+.tags ul li.severity-9 {
+  background: #cc008f; }
+  .tags ul li.severity-9:before {
+    border-color: transparent #cc008f transparent transparent; }
+
+.tags ul li.severity-0 {
+  background: #add5f1; }
+  .tags ul li.severity-0:before {
+    border-color: transparent #add5f1 transparent transparent; }
+
 .tags {
   float: right; }
   .tags ul {
@@ -12,7 +62,6 @@
       font-size: 11px;
       margin-left: 12px;
       padding: 0px 4px 0px 6px;
-      background: #ADD5F1;
       color: #588FB8;
       text-decoration: none;
       border-bottom-right-radius: 2px;
@@ -25,7 +74,6 @@
         left: -8px;
         width: 0px;
         height: 0px;
-        border-color: transparent #ADD5F1 transparent transparent;
         border-style: solid;
         border-width: 8px 8px 8px 0; }
       .tags ul li:after {

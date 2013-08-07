@@ -13,7 +13,7 @@ class Tag < ActiveRecord::Base
 
 
   def to_s
-    self.tag_descriptor.description
+    "!" * self.severity + self.tag_descriptor.description
   end
 end
 
