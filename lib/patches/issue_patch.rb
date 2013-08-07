@@ -63,20 +63,22 @@ module RedmineTag
               @tags_before_change.each do |tag|
                 if (self.tag_descriptor_ids.include?(tag.tag_descriptor_id))
                   updated_tag = Tag.find_by_tag_descriptor_id(tag.tag_descriptor_id)
+                  # Tag update
                   if updated_tag.severity != tag.severity
-                    @current_journal.details << JournalDetail.new(property: "tag", prop_key: updated_tag.id, old_value: tag.id, value: updated_tag.id)
+                    @current_journal.details << JournalDetail.new(property: "tag", prop_key: updated_tag.tag_descriptor.description, old_value: tag.severity, value: updated_tag.severity)
                   end
                 else
                   # Then this tag is removed
-                  @current_journal.details << JournalDetail.new(property: "tag", prop_key: tag.id, old_value: tag.severity, value: tag.to_s)
+                  @current_journal.details << JournalDetail.new(property: "tag", prop_key: tag.severity, old_value: tag.tag_descriptor.description, value: nil)
                 end
               end
 
               # Added tags
-              ids = @tags_before_change.map(&:tag_descriptor_id)
-              self.tag_descriptor_ids.each do |descriptor_id|
-                unless ids.include?(descriptor_id)
-                  @current_journal.details << JournalDetail.new(property: "tag", prop_key: descriptor_id, old_value: nil, value: nil);
+              self.reload
+              old_tag_descriptor_ids = @tags_before_change.map(&:tag_descriptor_id)
+              self.tags.each do |tag|
+                unless old_tag_descriptor_ids.include?(tag.tag_descriptor_id)
+                  @current_journal.details << JournalDetail.new(property: "tag", prop_key: tag.severity, old_value: nil, value: tag.tag_descriptor.description)
                 end
               end
 

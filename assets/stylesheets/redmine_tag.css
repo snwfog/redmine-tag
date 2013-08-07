@@ -1,88 +1,92 @@
-.tags ul li.severity-1 {
+div.tags {
+  margin: -8px 0px 5px; }
+
+ul.tags li.severity-1 {
   background: #3dcc00; }
-  .tags ul li.severity-1:before {
+  ul.tags li.severity-1:before {
     border-color: transparent #3dcc00 transparent transparent; }
 
-.tags ul li.severity-2 {
+ul.tags li.severity-2 {
   background: #7acc00; }
-  .tags ul li.severity-2:before {
+  ul.tags li.severity-2:before {
     border-color: transparent #7acc00 transparent transparent; }
 
-.tags ul li.severity-3 {
+ul.tags li.severity-3 {
   background: #b8cc00; }
-  .tags ul li.severity-3:before {
+  ul.tags li.severity-3:before {
     border-color: transparent #b8cc00 transparent transparent; }
 
-.tags ul li.severity-4 {
+ul.tags li.severity-4 {
   background: #cca300; }
-  .tags ul li.severity-4:before {
+  ul.tags li.severity-4:before {
     border-color: transparent #cca300 transparent transparent; }
 
-.tags ul li.severity-5 {
+ul.tags li.severity-5 {
   background: #cc6600; }
-  .tags ul li.severity-5:before {
+  ul.tags li.severity-5:before {
     border-color: transparent #cc6600 transparent transparent; }
 
-.tags ul li.severity-6 {
+ul.tags li.severity-6 {
   background: #cc2900; }
-  .tags ul li.severity-6:before {
+  ul.tags li.severity-6:before {
     border-color: transparent #cc2900 transparent transparent; }
 
-.tags ul li.severity-7 {
+ul.tags li.severity-7 {
   background: #cc0014; }
-  .tags ul li.severity-7:before {
+  ul.tags li.severity-7:before {
     border-color: transparent #cc0014 transparent transparent; }
 
-.tags ul li.severity-8 {
+ul.tags li.severity-8 {
   background: #cc0052; }
-  .tags ul li.severity-8:before {
+  ul.tags li.severity-8:before {
     border-color: transparent #cc0052 transparent transparent; }
 
-.tags ul li.severity-9 {
+ul.tags li.severity-9 {
   background: #cc008f; }
-  .tags ul li.severity-9:before {
+  ul.tags li.severity-9:before {
     border-color: transparent #cc008f transparent transparent; }
 
-.tags ul li.severity-0 {
+ul.tags li.severity-0 {
   background: #add5f1; }
-  .tags ul li.severity-0:before {
+  ul.tags li.severity-0:before {
     border-color: transparent #add5f1 transparent transparent; }
 
-.tags {
-  float: right; }
-  .tags ul {
-    margin: 0;
-    list-style: none; }
-    .tags ul li {
-      margin-bottom: 5px;
+ul.tags {
+  margin: 8px 0px 0px;
+  list-style: none;
+  display: inline-block;
+  padding-left: 0px; }
+  ul.tags li {
+    margin-bottom: -4px;
+    margin-right: 4px;
+    float: left;
+    height: 16px;
+    line-height: 16px;
+    position: relative;
+    font-size: 11px;
+    margin-left: 12px;
+    padding: 0px 4px 0px 6px;
+    color: #588FB8;
+    text-decoration: none;
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px; }
+    ul.tags li:before {
+      content: "";
       float: left;
-      height: 16px;
-      line-height: 16px;
-      position: relative;
-      font-size: 11px;
-      margin-left: 12px;
-      padding: 0px 4px 0px 6px;
-      color: #588FB8;
-      text-decoration: none;
-      border-bottom-right-radius: 2px;
-      border-top-right-radius: 2px; }
-      .tags ul li:before {
-        content: "";
-        float: left;
-        position: absolute;
-        top: 0px;
-        left: -8px;
-        width: 0px;
-        height: 0px;
-        border-style: solid;
-        border-width: 8px 8px 8px 0; }
-      .tags ul li:after {
-        content: "";
-        position: absolute;
-        top: 6px;
-        left: 0;
-        float: left;
-        width: 3px;
-        height: 3px;
-        border-radius: 1px;
-        background: #FFFEDC; }
+      position: absolute;
+      top: 0px;
+      left: -8px;
+      width: 0px;
+      height: 0px;
+      border-style: solid;
+      border-width: 8px 8px 8px 0; }
+    ul.tags li:after {
+      content: "";
+      position: absolute;
+      top: 6px;
+      left: 0;
+      float: left;
+      width: 3px;
+      height: 3px;
+      border-radius: 1px;
+      background: #FFFEDC; }

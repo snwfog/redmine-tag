@@ -1,3 +1,7 @@
 # English strings go here for Rails i18n
 en:
   field_tags: Tag
+
+  tag_journal_changed: "%{label} updated from %{old} to %{new}"
+  tag_journal_deleted: "%{label} deleted %{old}"
+  tag_journal_added: "%{label} added %{new}"

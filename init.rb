@@ -12,6 +12,7 @@ end
 object_to_prepare.to_prepare do
   require_dependency 'patches/issue_patch'
   require_dependency 'patches/issues_controller_patch'
+  require_dependency 'patches/issues_helper_patch'
 end
 
 Redmine::Plugin.register :redmine_tag do
