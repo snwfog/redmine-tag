@@ -34,7 +34,14 @@ module RedmineTag
               severity = tag.count("!")
               tag_descriptor = TagDescriptor.find_by_description description
               tag_descriptor ||= TagDescriptor.create(description: description)
-              tag = Tag.find_or_create_by_severity_and_tag_descriptor_id_and_issue_id(severity, tag_descriptor.id, self.id)
+              params =
+              {
+                severity: severity,
+                tag_descriptor_id: tag_descriptor.id,
+                issue_id: self.id
+              }
+
+              tag = Tag.unscoped.where(params).first_or_initialize
             end
           end
         end
@@ -44,7 +51,7 @@ module RedmineTag
             new_attributes.delete(:tags)
           end
 
-          build_tag_from_param
+          self.tags << build_tag_from_param
           assign_attributes_without_tags_removed(new_attributes, *args)
         end
 

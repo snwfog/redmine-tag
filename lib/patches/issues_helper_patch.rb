@@ -22,7 +22,7 @@ module RedmineTag
             # When its an add
             if (detail.old_value.nil?)
               severity = detail.prop_key.to_i
-              value = "!" * severity + detail.value
+              value = detail.value
               unless no_html
                 value = content_tag('ul', content_tag('li', value, class: "severity-#{severity}" ), class: "tags")
               end
@@ -30,7 +30,7 @@ module RedmineTag
             # When its an remove
             elsif (detail.value.nil?)
               severity = detail.prop_key.to_i
-              value = "!" * severity.to_i + detail.old_value
+              value = detail.old_value
               unless no_html
                 value = content_tag('ul', content_tag('li', value, class: "severity-#{severity}" ), class: "tags")
               end
@@ -40,8 +40,8 @@ module RedmineTag
               old_severity = detail.old_value.to_i
               new_severity = detail.value.to_i
               value = detail.prop_key
-              old_value = "!" * old_severity + value
-              new_value = "!" * new_severity + value
+              old_value = value
+              new_value = value
               unless no_html
                 old_value = content_tag('ul', content_tag('li', old_value, class: "severity-#{old_severity}"), class: "tags")
                 new_value = content_tag('ul', content_tag('li', new_value, class: "severity-#{new_severity}"), class: "tags")
