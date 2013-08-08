@@ -28,7 +28,7 @@ module RedmineTag
           return if @params_tags.empty?
 
           Tag.transaction do
-            Tag.delete_all(["issue_id", self.id])
+            self.tags.destroy_all
             tags = @params_tags.split(',').map do |tag|
               description = tag.scan(/[\w\s]+/).pop.strip
               severity = tag.count("!")
