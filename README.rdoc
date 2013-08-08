@@ -1,3 +1,0 @@
-= redmine_tags
-
-Description goes here
